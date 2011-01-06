@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :authenticate_person!
+  
   # GET /questions
   # GET /questions.xml
   def index
@@ -14,6 +16,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1.xml
   def show
     @question = Question.find(params[:id])
+    
+    @question_comment = QuestionComment.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,10 +45,11 @@ class QuestionsController < ApplicationController
   # POST /questions.xml
   def create
     @question = Question.new(params[:question])
+    @question.person = current_person
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to(@question, :notice => 'Question was successfully created.') }
+        format.html { redirect_to("/", :notice => 'Question was successfully created.') }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
@@ -60,7 +65,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.update_attributes(params[:question])
-        format.html { redirect_to(@question, :notice => 'Question was successfully updated.') }
+        format.html { redirect_to("/", :notice => 'Question was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,6 +83,20 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(questions_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def vote_up
+    @question = Question.find(params[:id])
+    if !@question.votes
+      @question.votes = 0
+    end
+    @question.votes = @question.votes + 1
+
+    respond_to do |format|
+      if @question.save()
+        format.html { redirect_to(@question, :notice => 'Your vote was recorded.') }
+      end
     end
   end
 end

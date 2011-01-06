@@ -1,0 +1,177 @@
+/* line 4, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 6, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+html {
+  font-size: 100.01%;
+}
+
+/* line 16, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
+pre, a, abbr, acronym, address, code, del, dfn, em, img,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote, q {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  quotes: "" "";
+}
+/* line 45, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+}
+
+/* line 20, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+th, td, caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 22, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+table {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+@import url(partials/base.css);
+/* line 13, ../../app/stylesheets/screen.scss */
+#container {
+  width: 950px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/* line 17, ../../app/stylesheets/screen.scss */
+h1 {
+  font-family: Georgia,Times,"Times New Roman",serif;
+  font-size: 36px;
+  text-align: center;
+  background: none repeat scroll 0 0 #464646;
+  color: #A3CFE4;
+  text-shadow: 0 1px 0 #E4F2FD;
+  padding: 0.2em;
+}
+
+/* line 27, ../../app/stylesheets/screen.scss */
+h2 {
+  font-family: Georgia,Times,"Times New Roman",serif;
+  font-size: 24px;
+  background: none repeat scroll 0 0 #E4F2FD;
+  border-bottom: 1px solid #C6D9E9;
+  padding: 0.2em;
+  margin-bottom: 0.4em;
+}
+
+/* line 35, ../../app/stylesheets/screen.scss */
+p {
+  padding-bottom: 0.2em;
+}
+
+/* line 38, ../../app/stylesheets/screen.scss */
+body {
+  font-size: 12pt;
+}
+
+/* line 42, ../../app/stylesheets/screen.scss */
+#sign-out-block {
+  float: right;
+  color: #999;
+}
+
+/* line 47, ../../app/stylesheets/screen.scss */
+td {
+  padding: 3px;
+}
+
+/* line 52, ../../app/stylesheets/screen.scss */
+form li {
+  list-style-type: none;
+}
+
+/* line 56, ../../app/stylesheets/screen.scss */
+#add-a-question-link, #sign-in-link, #add-a-comment-link, #sign-up-to-help-link {
+  float: right;
+  color: #999;
+}
+
+/* line 61, ../../app/stylesheets/screen.scss */
+.notice {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid #dddddd;
+  background: #fff6bf;
+  color: #514721;
+  border-color: #ffd324;
+}
+/* line 37, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+.notice a {
+  color: #514721;
+}
+
+/* line 64, ../../app/stylesheets/screen.scss */
+.error {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid #dddddd;
+  background: #fbe3e4;
+  color: #8a1f11;
+  border-color: #fbc2c4;
+}
+/* line 29, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+.error a {
+  color: #8a1f11;
+}
+
+/* line 67, ../../app/stylesheets/screen.scss */
+a, a:visited {
+  color: #4CA6CF;
+}

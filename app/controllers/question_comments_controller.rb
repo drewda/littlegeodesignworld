@@ -1,4 +1,6 @@
 class QuestionCommentsController < ApplicationController
+  before_filter :authenticate_person!
+  
   # GET /question_comments
   # GET /question_comments.xml
   def index
@@ -41,10 +43,11 @@ class QuestionCommentsController < ApplicationController
   # POST /question_comments.xml
   def create
     @question_comment = QuestionComment.new(params[:question_comment])
+    @question_comment.person = current_person
 
     respond_to do |format|
       if @question_comment.save
-        format.html { redirect_to(@question_comment, :notice => 'Question comment was successfully created.') }
+        format.html { redirect_to(@question_comment.question, :notice => "We've added your comment.") }
         format.xml  { render :xml => @question_comment, :status => :created, :location => @question_comment }
       else
         format.html { render :action => "new" }

@@ -1,4 +1,6 @@
 class ActionItemsController < ApplicationController
+  before_filter :authenticate_person!
+  
   # GET /action_items
   # GET /action_items.xml
   def index
@@ -14,6 +16,8 @@ class ActionItemsController < ApplicationController
   # GET /action_items/1.xml
   def show
     @action_item = ActionItem.find(params[:id])
+    
+    @action_item_comment = ActionItemComment.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -78,6 +82,36 @@ class ActionItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(action_items_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def vote_up
+    @action_item = ActionItem.find(params[:id])
+    if !@action_item.votes
+      @action_item.votes = 0
+    end
+    @action_item.votes = @action_item.votes + 1
+
+    respond_to do |format|
+      if @action_item.save()
+        format.html { redirect_to(@action_item, :notice => 'Your vote was recorded.') }
+      end
+    end
+  end
+  
+  def take_on
+    @action_item = ActionItem.find(params[:id])
+    
+    @person_taking_on_action_item = PersonTakingOnActionItem.new
+    @person_taking_on_action_item.person = current_person
+    @person_taking_on_action_item.action_item = @action_item
+    
+    respond_to do |format|
+      if PersonTakingOnActionItem.where({:person_id => current_person.id, :action_item_id => @action_item.id}).length > 0
+        format.html { redirect_to(@action_item, :notice => "Aren't you already signed up?") }
+      elsif @person_taking_on_action_item.save()
+        format.html { redirect_to(@action_item, :notice => 'You have been added to the list to help.') }
+      end
     end
   end
 end

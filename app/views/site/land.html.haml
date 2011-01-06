@@ -1,0 +1,141 @@
+- content_for :title do
+  GeodesignWorld.org
+
+- content_for :head do
+  :javascript
+    $(document).ready(function() {
+      $('#sign-in-link').click(function() {
+        $('#sign-up-block').hide();
+        $('#sign-in-link').hide();
+        $('#sign-in-block').show();
+        $('#sign-up-header').text('Sign in to an Existing Account')
+      });
+    });
+
+%h1
+  %img(src="/images/logo.png")
+- if !current_person
+  %a#sign-in-link(href='#') I've already signed up. I want to sign in again.
+  %h2#sign-up-header Step 1: Sign up for an Account
+  #sign-up-block
+    - semantic_form_for(:person, :url => registration_path(:person)) do |f|
+      %p= f.input :email
+      %p= f.input :password
+      %p= f.input :password_confirmation
+      - f.buttons do
+        = f.commit_button "Sign up"
+  
+  #sign-in-block(style="display:none;")
+    = form_for(:person, :url => session_path(:person)) do |f|
+      = f.label :email
+      = f.text_field :email
+    
+      = f.label :password
+      = f.password_field :password
+    
+      = f.check_box :remember_me, :checked => true
+      = f.label :remember_me
+    
+      = f.submit "Sign in"
+        
+- elsif current_person
+  = link_to "Whoa, I'm not #{current_person.name}!", destroy_person_session_path, :id => "sign-out-block"
+  %h2 Hello, #{current_person.name}.
+  - if !current_person.first_name
+    %h2 Step 2: Tell Us a Bit About Yourself and Add Yourself to the Map
+    - semantic_form_for(current_person, :url => person_path(current_person)) do |f|
+      = f.input :first_name, :name => "First name"
+      = f.input :last_name, :name => "Last name"
+      = f.input :bioblurb, :input_html => { :rows => 4 }
+      %p To mark your location, type in a city name (or an address even) and press Geocode
+      :javascript
+        $(document).ready(function() { 
+          latlng = new google.maps.LatLng(34.40512, -119.8444); // SB, man!
+          show_map(); 
+        });
+      %input#latitude-hidden-field(type="hidden" name="person[latitude]")
+      %input#longitude-hidden-field(type="hidden" name="person[longitude]")
+      %input#address(value="city, state, country")
+      %input(type="button" value="Geocode" onclick="codeAddress()")
+    
+      #map-canvas(style="width: 600px; height: 200px;")
+      - f.buttons do
+        = f.submit "Save details"
+  - else
+    %p You've already completed Steps 1 and 2, but you can still <a href="#" id="edit-details-link">edit your details</a>.
+    :javascript
+      $(document).ready(function() { 
+        $('#edit-details-link').click(function() {
+          $('#edit-details-block').show();
+          latlng = new google.maps.LatLng(#{current_person.latitude}, #{current_person.longitude});
+          show_map();
+        });
+      });
+    #edit-details-block(style="display: none;")
+      - semantic_form_for(current_person, :url => person_path(current_person)) do |f|
+        = f.input :first_name, :name => "First name"
+        = f.input :last_name, :name => "Last name"
+        = f.input :email
+        = f.input :bioblurb, :input_html => { :rows => 4 }
+        %p To change your location, type in a new city name (or an address even) and press Geocode
+        %input#latitude-hidden-field(type="hidden" name="person[latitude]")
+        %input#longitude-hidden-field(type="hidden" name="person[longitude]")
+        %input#address(value="city, state, country")
+        %input(type="button" value="Geocode" onclick="codeAddress()")
+      
+        #map-canvas(style="width: 600px; height: 200px;")
+        - f.buttons do
+          = f.submit "Save details"
+  %script(src="http://maps.google.com/maps/api/js?sensor=false")
+  :javascript
+    var geocoder;
+    var map;
+    var latlng;
+    function show_map() {
+      geocoder = new google.maps.Geocoder();
+      var myOptions = {
+        zoom: 8,
+        center: latlng,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      }
+      map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+      var marker = new google.maps.Marker({
+          map: map, 
+          position: latlng
+      });
+    }
+    function codeAddress() {
+      var address = document.getElementById("address").value;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map, 
+              position: results[0].geometry.location
+          });
+          $('#latitude-hidden-field').val(results[0].geometry.location.lat());
+          $('#longitude-hidden-field').val(results[0].geometry.location.lng());
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    }
+  
+  
+  = link_to "Add a New Question", new_question_path, :id => 'add-a-question-link'
+  %h2 Step 3: View, Add, or Comment on a Discussion Question
+  %table(border="")
+    - @questions.each do |question|
+      %tr
+        %td(width='10%')= pluralize(question.votes, 'vote')
+        %td(width='10%')= pluralize(question.question_comments.length, 'comment')
+        %td= link_to question.body, question_path(question)
+  
+  %h2 Step 4: Take on an Action Item
+  %table(border="")
+    - @action_items.each do |ai|
+      %tr
+        %td(width='10%')= pluralize(ai.votes, 'vote')
+        %td(width='10%')= pluralize(ai.action_item_comments.length, 'comment')
+        %td= link_to ai.body, action_item_path(ai)

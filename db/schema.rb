@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 8) do
 
   create_table "action_item_comments", :force => true do |t|
     t.integer  "action_item_id"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "person_taking_on_action_items", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "action_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

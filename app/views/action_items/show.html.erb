@@ -1,20 +1,48 @@
-<p id="notice"><%= notice %></p>
+<% content_for :head do %>
+<script>
+$(document).ready(function() {
+  $('#add-a-comment-link').click(function() {
+    $('#add-a-comment-link').hide();
+    $('#add-a-comment-form').show();
+  });
+});
+</script>
+<style>
+label {
+  display: none;
+}
+</style>
+<% end %>
 
-<p>
-  <b>Author:</b>
-  <%= @action_item.author_id %>
-</p>
+<h1><a href="/"><img src="/images/logo.png" alt="GeodesignWorld"/></a></h1>
+<%= link_to 'Take me back to the main page.', root_path, :id => 'sign-out-block' %>
+<h2>An Action Item</h2>
 
-<p>
-  <b>Approved:</b>
-  <%= @action_item.approved %>
-</p>
+<p style="font-size:24px;"><%= @action_item.body %></p>
+<p>&nbsp;</p>
+<p><%= pluralize(@action_item.votes, 'vote') %> <%= link_to "This is good. Add my vote.", vote_up_action_item_path(@action_item) %></p>
+<p>&nbsp;</p>
 
-<p>
-  <b>Body:</b>
-  <%= @action_item.body %>
-</p>
+<%= link_to "I'd like to help, too.", take_on_action_item_path(@action_item), :id => 'sign-up-to-help-link' %>
+<h2><%= pluralize(@action_item.people_whove_taken_on.length, 'person has') %> signed up to help with this action item.</h2>
+<ul>
+<% @action_item.people_whove_taken_on.each do |p| %>
+  <li><%= link_to p.name, person_path(p) %></li>
+<% end %>
+</ul>
 
+<a href="#" id="add-a-comment-link">Add a Comment</a>
+<h2><%= pluralize(@action_item.action_item_comments.length, 'comment') %></h2>
 
-<%= link_to 'Edit', edit_action_item_path(@action_item) %> |
-<%= link_to 'Back', action_items_path %>
+<% @action_item.action_item_comments.each do |comment| %>
+  <p><%= comment.body %> (<em><%= link_to comment.person.name, person_path(comment.person) %>, <%= time_ago_in_words(comment.created_at) %> ago</em>)</p>
+  <p>&nbsp;</p>
+<% end %>
+
+<div id="add-a-comment-form" style="display: none;">
+  <% semantic_form_for(@action_item_comment) do |f| %>
+    <%= f.input :body, :input_html => { :rows => 10, :cols => 40 } %>
+    <%= hidden_field_tag "action_item_comment[action_item_id]", @action_item.id %>
+    <%= f.commit_button "Post Comment" %>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
+  %head
+    %meta{'http-equiv' => "content-type", :content => "text/html;charset=UTF-8"}
+    %title= yield(:title)
+    = csrf_meta_tag
+    = javascript_include_tag "jquery-1.4.4.min"
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'formtastic.css'
+    = yield(:head)
+  %body
+    #container
+      - if flash[:error]
+        %p.error= flash[:error]
+      - if flash[:notice]
+        %p.notice= flash[:notice]
+        
+      = yield

@@ -1,4 +1,6 @@
 class ActionItemCommentsController < ApplicationController
+  before_filter :authenticate_person!
+  
   # GET /action_item_comments
   # GET /action_item_comments.xml
   def index
@@ -41,10 +43,11 @@ class ActionItemCommentsController < ApplicationController
   # POST /action_item_comments.xml
   def create
     @action_item_comment = ActionItemComment.new(params[:action_item_comment])
+    @action_item_comment.person = current_person
 
     respond_to do |format|
       if @action_item_comment.save
-        format.html { redirect_to(@action_item_comment, :notice => 'Action item comment was successfully created.') }
+        format.html { redirect_to(@action_item_comment.action_item, :notice => 'Your comment has been added.') }
         format.xml  { render :xml => @action_item_comment, :status => :created, :location => @action_item_comment }
       else
         format.html { render :action => "new" }

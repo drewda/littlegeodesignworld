@@ -1,4 +1,6 @@
 class PeopleController < ApplicationController
+  before_filter :authenticate_person!
+  
   # GET /people
   # GET /people.xml
   def index
@@ -60,7 +62,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to(@person, :notice => 'Person was successfully updated.') }
+        format.html { redirect_to("/", :notice => 'Got your new details all saved.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,0 +1,69 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Import the non-default scaffolding module.
+@import "blueprint/scaffolding";
+
+#container {
+  @include container;
+}
+
+h1 {
+  font-family: Georgia,Times,"Times New Roman",serif;
+  font-size: 36px;
+  text-align: center;
+  background: none repeat scroll 0 0 #464646;
+  color: #A3CFE4;
+  text-shadow: 0 1px 0 #E4F2FD;
+  padding: 0.2em;
+}
+
+h2 {
+  font-family: Georgia,Times,"Times New Roman",serif;
+  font-size: 24px;
+  background: none repeat scroll 0 0 #E4F2FD;
+  border-bottom: 1px solid #C6D9E9;
+  padding: 0.2em;
+  margin-bottom: 0.4em;
+}
+p {
+  padding-bottom: 0.2em;
+}
+body {
+  font-size: 12pt;
+}
+
+#sign-out-block {
+  float: right;
+  color: #999;
+}
+
+td {
+  padding: 3px;
+  
+}
+
+form li {
+  list-style-type: none;
+}
+
+#add-a-question-link, #sign-in-link, #add-a-comment-link, #sign-up-to-help-link  {
+  float: right;
+  color: #999;
+}
+
+.notice {
+  @include notice;
+}
+.error {
+  @include error;
+}
+a, a:visited {
+  color: #4CA6CF;
+}
