@@ -20,7 +20,7 @@ label {
 
 <p style="font-size:24px;"><%= @question.body %></p>
 <p>&nbsp;</p>
-<p>Originally posted by: <%= @question.person.name %></p>
+<p>Originally posted by: <%= link_to @question.person.name, @question.person %></p>
 <p>&nbsp;</p>
 <p><%= pluralize(@question.votes, 'vote') %> <%= link_to "This is good. Add my vote.", vote_up_question_path(@question) %></p>
 <p>&nbsp;</p>

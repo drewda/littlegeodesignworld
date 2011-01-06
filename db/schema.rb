@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 8) do
   end
 
   create_table "action_items", :force => true do |t|
-    t.integer  "author_id"
+    t.integer  "person_id"
     t.boolean  "approved"
     t.text     "body"
     t.integer  "votes"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 8) do
 
   create_table "questions", :force => true do |t|
     t.text     "body"
-    t.integer  "author_id"
+    t.integer  "person_id"
     t.integer  "votes"
     t.datetime "created_at"
     t.datetime "updated_at"
