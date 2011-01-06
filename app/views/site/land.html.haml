@@ -38,6 +38,23 @@
     
       = f.submit "Sign in"
       = link_to "Forgot your password?", new_password_path(:person)
+      
+  %h2 Discussion Questions (sign up/sign in to view more details)
+  %table(border="")
+    - @questions.each do |question|
+      %tr
+        %td(width='10%')= pluralize(question.votes, 'vote')
+        %td(width='10%')= pluralize(question.question_comments.length, 'comment')
+        %td= question.body
+
+  %h2 Action Items (sign up/sign in to view more details)
+  %table(border="")
+    - @action_items.each do |ai|
+      %tr
+        %td(width='10%')= pluralize(ai.votes, 'vote')
+        %td(width='10%')= pluralize(ai.action_item_comments.length, 'comment')
+        %td(width='10%')= pluralize(ai.people_whove_taken_on.length, 'volunteer')
+        %td= ai.body
         
 - elsif current_person
   = link_to "Whoa, I'm not #{current_person.name}!", destroy_person_session_path, :id => "sign-out-block"
