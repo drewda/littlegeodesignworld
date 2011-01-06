@@ -1,5 +1,15 @@
 Littlegeodesignworld::Application.routes.draw do
 
+  resources :question_comments
+
+  resources :questions
+
+  resources :action_item_comments
+
+  resources :action_items
+
+  resources :people
+
   devise_for :admins
 
   # The priority is based upon order of creation:

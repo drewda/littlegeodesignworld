@@ -1,0 +1,27 @@
+<h1>Listing action_item_comments</h1>
+
+<table>
+  <tr>
+    <th>Action item</th>
+    <th>Person</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @action_item_comments.each do |action_item_comment| %>
+  <tr>
+    <td><%= action_item_comment.action_item_id %></td>
+    <td><%= action_item_comment.person_id %></td>
+    <td><%= action_item_comment.body %></td>
+    <td><%= link_to 'Show', action_item_comment %></td>
+    <td><%= link_to 'Edit', edit_action_item_comment_path(action_item_comment) %></td>
+    <td><%= link_to 'Destroy', action_item_comment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Action item comment', new_action_item_comment_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @question_comment.question_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @question_comment.person_id %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @question_comment.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_question_comment_path(@question_comment) %> |
+<%= link_to 'Back', question_comments_path %>

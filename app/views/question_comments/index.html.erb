@@ -1,0 +1,27 @@
+<h1>Listing question_comments</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Person</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @question_comments.each do |question_comment| %>
+  <tr>
+    <td><%= question_comment.question_id %></td>
+    <td><%= question_comment.person_id %></td>
+    <td><%= question_comment.body %></td>
+    <td><%= link_to 'Show', question_comment %></td>
+    <td><%= link_to 'Edit', edit_question_comment_path(question_comment) %></td>
+    <td><%= link_to 'Destroy', question_comment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question comment', new_question_comment_path %>
