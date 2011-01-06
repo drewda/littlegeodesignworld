@@ -63,7 +63,7 @@
       - f.buttons do
         = f.submit "Save details"
   - else
-    %p You've already completed Steps 1 and 2, but you can still <a href="#" id="edit-details-link">edit your details</a>.
+    %p You've already completed Steps 1 and 2, but you can still <a href="#" id="edit-details-link">edit your details</a>. Don't forget to do Step 3 by taking <a href="http://www.surveymonkey.com/s/QQMDTNN">this survey</a>.
     :javascript
       $(document).ready(function() { 
         $('#edit-details-link').click(function() {
@@ -125,7 +125,7 @@
   
   
   = link_to "Add a New Question", new_question_path, :id => 'add-a-question-link'
-  %h2 Step 3: View, Add, or Comment on a Discussion Question
+  %h2 Step 4: View, Add, or Comment on a Discussion Question
   %table(border="")
     - @questions.each do |question|
       %tr
@@ -133,10 +133,11 @@
         %td(width='10%')= pluralize(question.question_comments.length, 'comment')
         %td= link_to question.body, question_path(question)
   
-  %h2 Step 4: Take on an Action Item
+  %h2 Step 5: Take on an Action Item
   %table(border="")
     - @action_items.each do |ai|
       %tr
         %td(width='10%')= pluralize(ai.votes, 'vote')
         %td(width='10%')= pluralize(ai.action_item_comments.length, 'comment')
+        %td(width='10%')= pluralize(ai.people_whove_taken_on.length, 'volunteer')
         %td= link_to ai.body, action_item_path(ai)
