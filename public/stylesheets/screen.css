@@ -175,3 +175,15 @@ form li {
 a, a:visited {
   color: #4CA6CF;
 }
+
+/* line 71, ../../app/stylesheets/screen.scss */
+#footer {
+  margin-top: 20px;
+  font-size: 10pt;
+  text-align: right;
+}
+
+/* line 76, ../../app/stylesheets/screen.scss */
+#footer a {
+  color: #999;
+}
