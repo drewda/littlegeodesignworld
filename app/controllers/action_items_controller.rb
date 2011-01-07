@@ -45,6 +45,7 @@ class ActionItemsController < ApplicationController
   # POST /action_items.xml
   def create
     @action_item = ActionItem.new(params[:action_item])
+    @action_item.person = current_person
 
     respond_to do |format|
       if @action_item.save

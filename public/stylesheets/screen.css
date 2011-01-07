@@ -138,7 +138,7 @@ form li {
 }
 
 /* line 56, ../../app/stylesheets/screen.scss */
-#add-a-question-link, #sign-in-link, #add-a-comment-link, #sign-up-to-help-link {
+#add-a-question-link, #sign-in-link, #add-a-comment-link, #sign-up-to-help-link, #add-an-action-item-link {
   float: right;
   color: #999;
 }

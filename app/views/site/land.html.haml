@@ -150,7 +150,8 @@
         %td(width='10%')= pluralize(question.question_comments.length, 'comment')
         %td= link_to question.body, question_path(question)
   
-  %h2 Step 5: Take on an Action Item
+  = link_to "Add an Action Item", new_action_item_path, :id => 'add-an-action-item-link'
+  %h2 Step 5: Volunteer for an Action Item
   %table(border="")
     - @action_items.each do |ai|
       %tr
